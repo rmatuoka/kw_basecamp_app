@@ -25,7 +25,6 @@
 							<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id, :responsible_party_id => @me.id }).each do |item|%>
 								<%if !item.completed%>
 									<%if item.attributes[:responsible_party_id] == @me.id%>
-										<%$total_tarefas = $total_tarefas + 1%>
 										<%=form_tag new_timetrack_path, :method => :get,  :remote => :true, :id => item.id.to_s%>
 											
 												<div id="name" class="twelve columns" style="height:auto; min-height:42px;">
