@@ -12,19 +12,25 @@
 		</div>
 		<div id="name" class="twelve columns panel">
 			<h2>Minhas Tarefas</h2>
+			<p>Legenda</p>
+			<span class="label round success">tarefas para hoje</span>
+			<span class="label round ">tarefas atrasadas</span>
+			<span class="label round secondary">próximas tarefas</span>
 			<%
 			@projects.each do |p|
+			$total_tarefas = 0
 			%>
-				<div id="name" class="twelve columns">
+				<div id="project<%=p.id%>" class="twelve columns">
 					<h4>
 						<%=p.name%>
 					</h4>
 					
 					<div id="name" class="twelve columns panel">
 						<%Basecamp::TodoList.find(:all, :params => { :project_id => p.id, :filter => 'pending' }).each do |tl|%>
-							<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id, :responsible_party_id => @me.id }).each do |item|%>
+							<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id}).each do |item|%>
 								<%if !item.completed%>
 									<%if item.attributes[:responsible_party_id] == @me.id%>
+										<%$total_tarefas = $total_tarefas + 1%>
 										<%=form_tag new_timetrack_path, :method => :get,  :remote => :true, :id => item.id.to_s%>
 											
 												<div id="name" class="twelve columns" style="height:auto; min-height:42px;">
@@ -40,7 +46,31 @@
 
 													<div class="eleven columns">
 														<h5>
-														<%=item.content%> <%=image_tag("loading.gif", :style=>"display:none;", :id => "load#{item.id}")%>
+														<%=image_tag("loading.gif", :style=>"display:none;", :id => "load#{item.id}")%>
+														
+														<%=item.content%>
+														
+														<%if !item.attributes[:due_at].blank?%>
+															<%if Date.parse(DateTime.now.to_s) > Date.parse(item.attributes[:due_at].to_s)%>
+																<!-- EM DIA -->
+																<span class="label round">
+																	<%=item.attributes[:due_at].strftime("%A, %d %Y")%>
+																<span>
+															<%elsif Date.parse(DateTime.now.to_s) == Date.parse(item.attributes[:due_at].to_s)%>
+																<!-- PARA HJ -->
+																<span class="label round success">
+																	<%=item.attributes[:due_at].strftime("%A, %d %Y")%>
+																<span>
+															<%else%>
+																<!-- ATRASADO -->
+																<span class="label round secondary">
+																	<%=item.attributes[:due_at].strftime("%A, %d %Y")%>
+																<span>
+															<%end%>
+														<%else%>
+														
+														<%end%> 
+
 														<%=hidden_field_tag :todo_item_id, item.id%>
 														</h5>
 														
@@ -48,10 +78,7 @@
 															<span class="label secondary">Digite o motivo de ter pausado a tarefa. Ex: Fazer outro Job, horário de almoço ou tarefa finalizada.</span>
 															<%=text_area_tag :motivo%>
 															
-															<%#=check_box_tag :finalizar%> <!-- finalizar a tarefa?<br /> -->
-															<%#=submit_tag "Salvar", :class => "medium button", :id => "btn" + item.id.to_s, :onclick=>"$('#load#{item.id}').fadeIn();"%>
 														</div>
-														
 													</div>
 												</div>
 										</form>
@@ -61,7 +88,11 @@
 						<%end%>
 					</div>
 				</div>
-				
+				<%if $total_tarefas < 1%>
+					<script>
+						$("#project<%=p.id%>").css("display","none");
+					</script>
+				<%end%>
 			<%end%>
 		</div>
 		

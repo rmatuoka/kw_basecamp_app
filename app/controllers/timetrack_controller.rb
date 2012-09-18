@@ -68,9 +68,6 @@ class TimetrackController < ApplicationController
           time_entry.date = Date.today
           time_entry.person_id = @me.id
           time_entry.save
-          
-          
-          
 
           #LIMPA OS COOKIES
           cookies.delete :timetracking

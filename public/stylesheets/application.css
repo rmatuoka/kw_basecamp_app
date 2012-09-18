@@ -6,7 +6,8 @@ body
 
 header
 {
-	height:95px;
+	height:auto;
+	min-height:95px;
 	border-top:4px solid red;
 }
 
@@ -17,21 +18,22 @@ header
 }
 section
 {
+	height:auto;
 	position:relative;
 	min-height:100% !important;
 }
 
-
-
 footer
 {
-	position:relative;
+	position:fixed;
 	z-index:30000;
 	bottom:0px;
 	color:#fff;
 	background-color:#4d4d4d;
-	height:60px;
+	height:auto;
+	min-height:60px;
 	border-top:4px solid red;
+	width:100%;
 }
 
 	footer #copyright
