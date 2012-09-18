@@ -54,17 +54,17 @@
 															<%if Date.parse(DateTime.now.to_s) > Date.parse(item.attributes[:due_at].to_s)%>
 																<!-- EM DIA -->
 																<span class="label round">
-																	<%=item.attributes[:due_at].strftime("%A, %d %Y")%>
+																	<%=item.attributes[:due_at].strftime("%A, %d %B %Y")%>
 																<span>
 															<%elsif Date.parse(DateTime.now.to_s) == Date.parse(item.attributes[:due_at].to_s)%>
 																<!-- PARA HJ -->
 																<span class="label round success">
-																	<%=item.attributes[:due_at].strftime("%A, %d %Y")%>
+																	<%=item.attributes[:due_at].strftime("%A, %d %B %Y")%>
 																<span>
 															<%else%>
 																<!-- ATRASADO -->
 																<span class="label round secondary">
-																	<%=item.attributes[:due_at].strftime("%A, %d %Y")%>
+																	<%=item.attributes[:due_at].strftime("%A, %d %B %Y")%>
 																<span>
 															<%end%>
 														<%else%>
