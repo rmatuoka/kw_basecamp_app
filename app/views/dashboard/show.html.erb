@@ -1,0 +1,32 @@
+<h1>Dashboard</h1>
+<%@projects.each do |p|%>
+<div id="Project" class="twelve columns">
+	<h2><%=p.name%> - <%=p.id%></h2>
+	
+	<%Basecamp::TodoList.find(:all, :project_id => p.id).each do |tl|%>
+	<div id="Sprint" class="twelve columns">
+		<h3><%=tl.name%></h3>
+		
+		<div id="ToDos" class="three columns">
+			<h4>To-Dos</h4>
+			<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id }).each do |item|%>
+				<%=item.content%>
+			<%end%>
+		</div>
+
+		<div id="Progress" class="three columns">
+			<h4>Em andamento</h4>
+		</div>
+
+		<div id="Verify" class="three columns">
+			<h4>QA</h4>
+		</div>
+
+		<div id="Feitos" class="three columns">
+			<h4>Conluído</h4>
+		</div>
+		
+	</div>
+	<%end%>
+</div>
+<%end%>

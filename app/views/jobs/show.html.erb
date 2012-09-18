@@ -1,0 +1,40 @@
+<% title "Job" %>
+
+<p>
+  <strong>Todo List:</strong>
+  <%= @job.todo_list_id %>
+</p>
+<p>
+  <strong>Todo List Item:</strong>
+  <%= @job.todo_list_item_id %>
+</p>
+<p>
+  <strong>Nome:</strong>
+  <%= @job.nome %>
+</p>
+<p>
+  <strong>Descricao:</strong>
+  <%= @job.descricao %>
+</p>
+<p>
+  <strong>Repetir:</strong>
+  <%= @job.repetir %>
+</p>
+<p>
+  <strong>Data Inicio:</strong>
+  <%= @job.data_inicio %>
+</p>
+<p>
+  <strong>Data Fim:</strong>
+  <%= @job.data_fim %>
+</p>
+<p>
+  <strong>Person:</strong>
+  <%= @job.person_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_job_path(@job) %> |
+  <%= link_to "Destroy", @job, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", jobs_path %>
+</p>

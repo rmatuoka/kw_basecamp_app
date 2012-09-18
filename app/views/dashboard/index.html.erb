@@ -1,0 +1,75 @@
+<div id="Dashboard" class="twelve columns">
+	<h1>Dashboard</h1>
+	
+	<%if !@dashbaords%>
+		<%@dashboards.each do |d|%>
+		<div id="Project" class="twelve columns">
+			<h2><%=d.name%></h2>
+
+			<%Basecamp::TodoList.find(:all, :params => { :project_id => d.project_id, :filter => 'pending' }).each do |tl|%>
+			<div id="Sprint" class="twelve columns panel">
+				<h3><%=tl.name%></h3>
+
+				<div id="ToDos" class="three columns panel callout">
+					<h4>To-Dos</h4>
+					<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id, :complete => true }).each do |item|%>
+						<%if !item.completed && item.attributes[:comments_count] < 2%>
+							<%=item.content%> -  <i><%=item.attributes[:responsible_party_name]%></i><br /><br />
+						<%end%>
+					<%end%>
+				</div>
+
+				<div id="Progress" class="three columns panel">
+					<h4>Em andamento</h4>
+					<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id, :complete => true }).each do |item|%>
+						<%if !item.completed && item.attributes[:comments_count] > 1%>
+							<%=item.content%> -  <i><%=item.attributes[:responsible_party_name]%></i><br /><br />
+						<%end%>
+					<%end%>
+				</div>
+
+				<div id="Verify" class="three columns panel callout">
+					<h4>QA</h4>
+					<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id, :complete => true }).each do |item|%>
+						<%if item.completed && item.attributes[:comments_count] > 0%>
+ 
+								<%=item.content%> -  <i><%=item.attributes[:responsible_party_name]%> - <%=item.attributes[:comments_count]%></i><br /><br />
+						<%end%>
+					<%end%>
+				</div>
+
+				<div id="Feitos" class="three columns panel ">
+					<h4>Conluído</h4>
+				</div>
+
+			</div>
+			<%end%>
+		</div>
+		<%end%>
+	<%end%>
+	
+	
+	
+	
+	<div id="name" class="twelve columns">
+		
+		<div id="name" class="alert-box">
+			Você pode escolher os projetos que você mais utiliza para ficar em sua home.
+		</div>
+		
+		<h2>Projetos</h2>
+		<%@projects.each do |p|%>
+			<%if !Dashboard.first(:conditions => ['project_id = ?', p.id])%>
+			<%=form_tag new_dashboard_path, :method => :get,  :remote => :true, :id => p.id%>
+				<h3>
+					<%=submit_tag "+", :class => "small button"%>
+					<%=hidden_field_tag :project_id, p.id%>
+					<%=hidden_field_tag :name, p.name%>
+					<%=hidden_field_tag :person_id, @me.id%>
+					<%=p.name%>
+				</h3>
+			</form>
+			<%end%>
+		<%end%>
+	</div>
+</div>

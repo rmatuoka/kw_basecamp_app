@@ -1,0 +1,28 @@
+<% title "Briefings" %>
+
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Task</th>
+    <th>Cliente</th>
+    <th>Nome Da Acao</th>
+    <th>Nome Da Peca</th>
+    <th>Dead Line</th>
+  </tr>
+  <% for briefing in @briefings %>
+    <tr>
+      <td><%= briefing.user_id %></td>
+      <td><%= briefing.task %></td>
+      <td><%= briefing.cliente %></td>
+      <td><%= briefing.nome_da_acao %></td>
+      <td><%= briefing.nome_da_peca %></td>
+      <td><%= briefing.dead_line %></td>
+      <td><%= link_to "Show", briefing %></td>
+      <td><%= link_to "Edit", edit_briefing_path(briefing) %></td>
+      <td><%= link_to "Destroy", briefing, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Briefing", new_briefing_path %></p>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+	<link href='http://fonts.googleapis.com/css?family=Headland+One' rel='stylesheet' type='text/css'>    
+	<%= stylesheet_link_tag :all %>
+    <%= javascript_include_tag :defaults %>
+
+	
+	<%=javascript_include_tag "foundation.min.js"%>
+	<%=javascript_include_tag "app.js"%>
+	<%=javascript_include_tag "jquery.placeholder.js"%>
+	<%=javascript_include_tag "modernizr.foundation.js"%>
+	<%=javascript_include_tag "jquery.foundation.navigation.js"%>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+  	<script>
+		$(document).foundationNavigation();
+	</script>
+ </head>
+  <body>
+	<header>
+		<div id="logo" class="two columns">
+			<%=image_tag("sato7.png")%>	
+		</div>
+		
+		<div id="nav" class="six columns">
+			<ul class="nav-bar">
+			  <li><a href="/dashboard">Dashboard</a></li>
+			  <li><a href="/timetrack">Time Tracking</a></li>
+			  
+			<!-- <li class="has-flyout">
+			    <a href="#">Teste</a>
+			    <a href="#" class="flyout-toggle"><span> </span></a>
+			    <ul class="flyout [small, large]">
+			      <li><a href="#">Teste 1</a></li>
+			      <li><a href="#">Teste 2</a></li>
+			      <li><a href="#">Teste 3</a></li>
+			    </ul>
+			  </li> -->
+			</ul>
+		</div>
+	</header>
+	
+	<section>
+		<% flash.each do |name, msg| %>
+	    	<%= content_tag :div, msg, :id => "flash_#{name}" %>
+	    <% end %>
+	
+		<%= yield %>
+	</section>
+	
+	
+	<footer>
+		<div id="copyright" class="three columns">
+			SATO7™ 2012
+		</div>
+	</footer>
+
+  </body>
+</html>

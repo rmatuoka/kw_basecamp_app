@@ -1,0 +1,46 @@
+<% title "Jobs" %>
+
+<table>
+  <tr>
+    <th>Todo List</th>
+    <th>Todo List Item</th>
+    <th>Nome</th>
+    <th>Descricao</th>
+    <th>Repetir</th>
+    <th>Data Inicio</th>
+    <th>Data Fim</th>
+    <th>Person</th>
+  </tr>
+  <% for job in @jobs %>
+    <tr>
+      <td>
+		<%
+		todo_list = Basecamp::TodoList.find(job.todo_list_id)
+		%>
+		<%= todo_list.name %>
+	  </td>
+      <td>
+		<%
+		todo_list_item = Basecamp::TodoItem.find(job.todo_list_item_id)
+		%>
+		<%= todo_list_item.content %>
+	  </td>
+      <td><%= job.nome %></td>
+      <td><%= job.descricao %></td>
+      <td><%= job.repetir %></td>
+      <td><%= job.data_inicio %></td>
+      <td><%= job.data_fim %></td>
+      <td>
+		<%
+		person = Basecamp::Person.find(job.person_id)
+		%>
+		<%= person.first_name %> <%= person.last_name %>
+	  </td>
+      <td><%= link_to "Show", job %></td>
+      <td><%= link_to "Edit", edit_job_path(job) %></td>
+      <td><%= link_to "Destroy", job, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Job", new_job_path %></p>

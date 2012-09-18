@@ -1,0 +1,40 @@
+html, body {height:100%}
+body
+{
+	background-color:#e4e4e4 !important;
+}
+
+header
+{
+	height:95px;
+	border-top:4px solid red;
+}
+
+#logo
+{
+	margin-top:20px;
+	
+}
+section
+{
+	position:relative;
+	min-height:100% !important;
+}
+
+
+
+footer
+{
+	position:relative;
+	z-index:30000;
+	bottom:0px;
+	color:#fff;
+	background-color:#4d4d4d;
+	height:60px;
+	border-top:4px solid red;
+}
+
+	footer #copyright
+	{
+		margin-top:20px;
+	}

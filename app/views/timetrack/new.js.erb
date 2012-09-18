@@ -1,0 +1,42 @@
+<%if @isStart%>
+	$("#load<%=@item_id%>").fadeOut();
+	$("#btn<%=@item_id%>").addClass("secondary");
+	$("#btn<%=@item_id%>").val("Stop");
+	$("#motivo<%=@item_id%>").fadeIn();
+
+	//alert($("#load<%=@item_id%>"));
+	//ESCONDE TODOS OS BOTOES
+	$('input').each(function(index) {
+	    if($(this).val() == "Start"){
+			//alert($(this));
+			$(this).fadeOut();
+		}
+	});
+	
+	
+	
+<%else%>
+	if(<%=@isValido%> == true)
+	{
+		$("#btn<%=@item_id%>").removeClass("secondary");
+		$("#btn<%=@item_id%>").val("Start");
+		$('#motivo<%=@item_id%>').fadeOut();
+		
+		//MOSTRA TODOS OS BOTOES
+		$('input').each(function(index) {
+		    if($(this).val() == "Start"){
+				$(this).fadeIn();
+			}
+		});
+		
+		$("#load<%=@item_id%>").fadeOut();
+	}
+	else
+	{
+		alert("o campo motivo é obrigatório");
+		$('#motivo<%=@item_id%>').focus();
+		
+		$("#load<%=@item_id%>").fadeOut();
+	}
+	
+<%end%>

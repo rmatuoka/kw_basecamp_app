@@ -1,0 +1,64 @@
+<% title "Briefing" %>
+
+<p>
+  <strong>User:</strong>
+  <%= @briefing.user_id %>
+</p>
+<p>
+  <strong>Task:</strong>
+  <%= @briefing.task %>
+</p>
+<p>
+  <strong>Cliente:</strong>
+  <%= @briefing.cliente %>
+</p>
+<p>
+  <strong>Nome Da Acao:</strong>
+  <%= @briefing.nome_da_acao %>
+</p>
+<p>
+  <strong>Nome Da Peca:</strong>
+  <%= @briefing.nome_da_peca %>
+</p>
+<p>
+  <strong>Dead Line:</strong>
+  <%= @briefing.dead_line %>
+</p>
+<p>
+  <strong>Publicos:</strong>
+  <%= @briefing.publicos %>
+</p>
+<p>
+  <strong>Budget:</strong>
+  <%= @briefing.budget %>
+</p>
+<p>
+  <strong>Objetivo:</strong>
+  <%= @briefing.objetivo %>
+</p>
+<p>
+  <strong>Formato:</strong>
+  <%= @briefing.formato %>
+</p>
+<p>
+  <strong>Midia:</strong>
+  <%= @briefing.midia %>
+</p>
+<p>
+  <strong>Conteudo:</strong>
+  <%= @briefing.conteudo %>
+</p>
+<p>
+  <strong>Descricao:</strong>
+  <%= @briefing.descricao %>
+</p>
+<p>
+  <strong>Observacoes:</strong>
+  <%= @briefing.observacoes %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_briefing_path(@briefing) %> |
+  <%= link_to "Destroy", @briefing, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", briefings_path %>
+</p>

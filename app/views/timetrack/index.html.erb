@@ -1,0 +1,71 @@
+<%content_for :head do%>
+
+<%end%>
+
+<div id="TimeTracking" class="twelve columns">
+	<h1>Time Tracking</h1>
+	
+	<div id="name" class="twelve columns">
+		
+		<div id="name" class="alert-box">
+			Escolha a tarefa que você deseja iniciar o time tracking e clique em "START".
+		</div>
+		<div id="name" class="twelve columns panel">
+			<h2>Minhas Tarefas</h2>
+			<%
+			@projects.each do |p|
+			$total_tarefas = 0
+			%>
+				<div id="name" class="twelve columns" <%="style='display:none'" if $total_tarefas == 0%>>
+					<h4>
+						<%=p.name%>
+					</h4>
+					
+					<div id="name" class="twelve columns panel">
+						<%Basecamp::TodoList.find(:all, :params => { :project_id => p.id, :filter => 'pending' }).each do |tl|%>
+							<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id, :responsible_party_id => @me.id }).each do |item|%>
+								<%if !item.completed%>
+									<%if item.attributes[:responsible_party_id] == @me.id%>
+										<%$total_tarefas = $total_tarefas + 1%>
+										<%=form_tag new_timetrack_path, :method => :get,  :remote => :true, :id => item.id.to_s%>
+											
+												<div id="name" class="twelve columns" style="height:auto; min-height:42px;">
+													<div class="one columns">
+														<%if cookies[:timetracking] == item.id.to_s%>
+															<input type="submit" value="Stop" class="medium button secondary" id="btn<%=item.id.to_s%>" onclick="$('#load<%=item.id%>').fadeIn();">
+															
+															<%#=button_tag, :type => "button", "Stop", :class => "medium button secondary", :id => "btn" + item.id.to_s, :onclick=>"$('#motivo#{item.id.to_s}').fadeIn();"%>
+														<%else%>
+															<%=submit_tag "Start", :class => "medium button", :id => "btn" + item.id.to_s, :onclick=>"$('#load#{item.id}').fadeIn();"%>
+														<%end%>
+													</div>
+
+													<div class="eleven columns">
+														<h5>
+														<%=item.content%> <%=image_tag("loading.gif", :style=>"display:none;", :id => "load#{item.id}")%>
+														<%=hidden_field_tag :todo_item_id, item.id%>
+														</h5>
+														
+														<div id="motivo<%=item.id.to_s%>" class="twelve columns" <%="style='display:none;'" if cookies[:timetracking] != item.id.to_s%>>
+															<span class="label secondary">Digite o motivo de ter pausado a tarefa. Ex: Fazer outro Job, horário de almoço ou tarefa finalizada.</span>
+															<%=text_area_tag :motivo%>
+															
+															<%#=check_box_tag :finalizar%> <!-- finalizar a tarefa?<br /> -->
+															<%#=submit_tag "Salvar", :class => "medium button", :id => "btn" + item.id.to_s, :onclick=>"$('#load#{item.id}').fadeIn();"%>
+														</div>
+														
+													</div>
+												</div>
+										</form>
+									<%end%>
+								<%end%>
+							<%end%>
+						<%end%>
+					</div>
+				</div>
+				
+			<%end%>
+		</div>
+		
+	</div>
+</div>

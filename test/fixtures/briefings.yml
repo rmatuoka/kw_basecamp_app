@@ -1,0 +1,31 @@
+one:
+  user_id: 1
+  task: MyString
+  cliente: MyString
+  nome_da_acao: MyString
+  nome_da_peca: MyString
+  dead_line: 2012-04-26 00:13:41
+  publicos: MyString
+  budget: 9.99
+  objetivo: MyText
+  formato: MyText
+  midia: MyString
+  conteudo: MyText
+  descricao: MyText
+  observacoes: MyText
+
+two:
+  user_id: 1
+  task: MyString
+  cliente: MyString
+  nome_da_acao: MyString
+  nome_da_peca: MyString
+  dead_line: 2012-04-26 00:13:41
+  publicos: MyString
+  budget: 9.99
+  objetivo: MyText
+  formato: MyText
+  midia: MyString
+  conteudo: MyText
+  descricao: MyText
+  observacoes: MyText

@@ -1,0 +1,60 @@
+<%= form_for @briefing do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :task %><br />
+    <%= f.text_field :task %>
+  </p>
+  <p>
+    <%= f.label :cliente %><br />
+    <%= f.text_field :cliente %>
+  </p>
+  <p>
+    <%= f.label :nome_da_acao %><br />
+    <%= f.text_field :nome_da_acao %>
+  </p>
+  <p>
+    <%= f.label :nome_da_peca %><br />
+    <%= f.text_field :nome_da_peca %>
+  </p>
+  <p>
+    <%= f.label :dead_line %><br />
+    <%= f.datetime_select :dead_line %>
+  </p>
+  <p>
+    <%= f.label :publicos %><br />
+    <%= f.text_field :publicos %>
+  </p>
+  <p>
+    <%= f.label :budget %><br />
+    <%= f.text_field :budget %>
+  </p>
+  <p>
+    <%= f.label :objetivo %><br />
+    <%= f.text_area :objetivo %>
+  </p>
+  <p>
+    <%= f.label :formato %><br />
+    <%= f.text_area :formato %>
+  </p>
+  <p>
+    <%= f.label :midia %><br />
+    <%= f.text_field :midia %>
+  </p>
+  <p>
+    <%= f.label :conteudo %><br />
+    <%= f.text_area :conteudo %>
+  </p>
+  <p>
+    <%= f.label :descricao %><br />
+    <%= f.text_area :descricao %>
+  </p>
+  <p>
+    <%= f.label :observacoes %><br />
+    <%= f.text_area :observacoes %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

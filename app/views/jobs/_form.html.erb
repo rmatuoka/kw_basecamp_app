@@ -1,0 +1,36 @@
+<%= form_for @job do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :todo_list_id %><br />
+    <%= f.text_field :todo_list_id %>
+  </p>
+  <p>
+    <%= f.label :todo_list_item_id %><br />
+    <%= f.text_field :todo_list_item_id %>
+  </p>
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>
+  <p>
+    <%= f.label :descricao %><br />
+    <%= f.text_area :descricao %>
+  </p>
+  <p>
+    <%= f.label :repetir %><br />
+    <%= f.text_field :repetir %>
+  </p>
+  <p>
+    <%= f.label :data_inicio %><br />
+    <%= f.datetime_select :data_inicio %>
+  </p>
+  <p>
+    <%= f.label :data_fim %><br />
+    <%= f.datetime_select :data_fim %>
+  </p>
+  <p>
+    <%= f.label :person_id %><br />
+    <%= f.text_field :person_id %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
