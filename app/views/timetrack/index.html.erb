@@ -14,9 +14,8 @@
 			<h2>Minhas Tarefas</h2>
 			<%
 			@projects.each do |p|
-			$total_tarefas = 0
 			%>
-				<div id="name" class="twelve columns" <%="style='display:none'" if $total_tarefas == 0%>>
+				<div id="name" class="twelve columns">
 					<h4>
 						<%=p.name%>
 					</h4>
