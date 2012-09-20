@@ -30,22 +30,22 @@
 							<%tl.todo_items.all(:conditions => ['responsible_party_id = ? AND completed = 0', @me.id]).each do |item|%>
 
 										<%$total_tarefas = $total_tarefas + 1%>
-										<%=form_tag new_timetrack_path, :method => :get,  :remote => :true, :id => item.id.to_s%>
+										<%=form_tag new_timetrack_path, :method => :get,  :remote => :true, :id => item.basecamp_id.to_s%>
 											
 												<div id="name" class="twelve columns" style="height:auto; min-height:42px;">
 													<div class="one columns">
-														<%if cookies[:timetracking] == item.id.to_s%>
-															<input type="submit" value="Stop" class="medium button secondary" id="btn<%=item.id.to_s%>" onclick="$('#load<%=item.id%>').fadeIn();">
+														<%if cookies[:timetracking] == item.basecamp_id.to_s%>
+															<input type="submit" value="Stop" class="medium button secondary" id="btn<%=item.basecamp_id.to_s%>" onclick="$('#load<%=item.basecamp_id%>').fadeIn();">
 															
 															<%#=button_tag, :type => "button", "Stop", :class => "medium button secondary", :id => "btn" + item.id.to_s, :onclick=>"$('#motivo#{item.id.to_s}').fadeIn();"%>
 														<%else%>
-															<%=submit_tag "Start", :class => "medium button", :id => "btn" + item.id.to_s, :onclick=>"$('#load#{item.id}').fadeIn();"%>
+															<%=submit_tag "Start", :class => "medium button", :id => "btn" + item.basecamp_id.to_s, :onclick=>"$('#load#{item.basecamp_id}').fadeIn();"%>
 														<%end%>
 													</div>
 
 													<div class="eleven columns">
 														<h5>
-														<%=image_tag("loading.gif", :style=>"display:none;", :id => "load#{item.id}")%>
+														<%=image_tag("loading.gif", :style=>"display:none;", :id => "load#{item.basecamp_id}")%>
 														
 														<%=item.content%>
 														
@@ -73,7 +73,7 @@
 														<%=hidden_field_tag :todo_item_id, item.basecamp_id%>
 														</h5>
 														
-														<div id="motivo<%=item.id.to_s%>" class="twelve columns" <%="style='display:none;'" if cookies[:timetracking] != item.id.to_s%>>
+														<div id="motivo<%=item.basecamp_id.to_s%>" class="twelve columns" <%="style='display:none;'" if cookies[:timetracking] != item.basecamp_id.to_s%>>
 															<span class="label secondary">Digite o motivo de ter pausado a tarefa. Ex: Fazer outro Job, horário de almoço ou tarefa finalizada.</span>
 															<%=text_area_tag :motivo%>
 															
