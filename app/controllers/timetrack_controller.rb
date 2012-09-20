@@ -2,7 +2,7 @@ class TimetrackController < ApplicationController
   before_filter :basecamp_connect
   
   def index
-    @projects = Basecamp::Project.find(:all, :params => {:person_id => @me.id})
+    @projects = Project.all
     
     #cookies.delete :timetracking
     #cookies.delete :datetracking
@@ -11,7 +11,6 @@ class TimetrackController < ApplicationController
   def new
     @isStart = false
     @item_id = params[:todo_item_id]
-    
     
     
     #SETA COOKIES

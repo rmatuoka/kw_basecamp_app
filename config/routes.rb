@@ -5,7 +5,8 @@ KwBasecapApp::Application.routes.draw do
   resources :users
   resources :dashboard
   resources :timetrack
-
+  resources :import
+  
   root :to => "timetrack#index"
 
 end

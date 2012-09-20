@@ -26,10 +26,9 @@
 					</h4>
 					
 					<div id="name" class="twelve columns panel">
-						<%Basecamp::TodoList.find(:all, :params => { :project_id => p.id, :filter => 'pending' }).each do |tl|%>
-							<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id}).each do |item|%>
-								<%if !item.completed%>
-									<%if item.attributes[:responsible_party_id] == @me.id%>
+						<%p.todo_lists.all(:conditions => ['completed = 0']).each do |tl|%>
+							<%tl.todo_items.all(:conditions => ['responsible_party_id = ? AND completed = 0', @me.id]).each do |item|%>
+
 										<%$total_tarefas = $total_tarefas + 1%>
 										<%=form_tag new_timetrack_path, :method => :get,  :remote => :true, :id => item.id.to_s%>
 											
@@ -50,28 +49,28 @@
 														
 														<%=item.content%>
 														
-														<%if !item.attributes[:due_at].blank?%>
-															<%if Date.parse(DateTime.now.to_s) > Date.parse(item.attributes[:due_at].to_s)%>
+														<%if !item.due_at.blank?%>
+															<%if Date.parse(DateTime.now.to_s) > Date.parse(item.due_at.to_s)%>
 																<!-- EM DIA -->
 																<span class="label round">
-																	<%=item.attributes[:due_at].strftime("%A, %d %B %Y")%>
+																	<%=item.due_at.strftime("%A, %d %B %Y")%>
 																<span>
-															<%elsif Date.parse(DateTime.now.to_s) == Date.parse(item.attributes[:due_at].to_s)%>
+															<%elsif Date.parse(DateTime.now.to_s) == Date.parse(item.due_at.to_s)%>
 																<!-- PARA HJ -->
 																<span class="label round success">
-																	<%=item.attributes[:due_at].strftime("%A, %d %B %Y")%>
+																	<%=item.due_at.strftime("%A, %d %B %Y")%>
 																<span>
 															<%else%>
 																<!-- ATRASADO -->
 																<span class="label round secondary">
-																	<%=item.attributes[:due_at].strftime("%A, %d %B %Y")%>
+																	<%=item.due_at.strftime("%A, %d %B %Y")%>
 																<span>
 															<%end%>
 														<%else%>
 														
 														<%end%> 
 
-														<%=hidden_field_tag :todo_item_id, item.id%>
+														<%=hidden_field_tag :todo_item_id, item.basecamp_id%>
 														</h5>
 														
 														<div id="motivo<%=item.id.to_s%>" class="twelve columns" <%="style='display:none;'" if cookies[:timetracking] != item.id.to_s%>>
@@ -82,8 +81,7 @@
 													</div>
 												</div>
 										</form>
-									<%end%>
-								<%end%>
+
 							<%end%>
 						<%end%>
 					</div>

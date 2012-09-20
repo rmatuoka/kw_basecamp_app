@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120918021818) do
+ActiveRecord::Schema.define(:version => 20120919225432) do
 
   create_table "briefings", :force => true do |t|
     t.integer  "user_id"
@@ -48,6 +48,39 @@ ActiveRecord::Schema.define(:version => 20120918021818) do
     t.datetime "data_inicio"
     t.datetime "data_fim"
     t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.integer  "basecamp_id"
+    t.string   "name"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "todo_items", :force => true do |t|
+    t.integer  "todo_list_id"
+    t.integer  "basecamp_id"
+    t.datetime "due_at"
+    t.string   "content"
+    t.string   "creator_name"
+    t.integer  "responsible_party_id"
+    t.boolean  "completed"
+    t.string   "responsible_party_name"
+    t.datetime "commented_at"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "todo_lists", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "basecamp_id"
+    t.boolean  "completed"
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

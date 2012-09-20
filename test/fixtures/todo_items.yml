@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  todo_list_id: 1
+  basecamp_id: 1
+  due_at: 2012-09-19 19:54:32
+  content: MyString
+  creator_name: MyString
+  responsible_party_id: 1
+  completed: false
+  responsible_party_name: MyString
+  commented_at: 2012-09-19 19:54:32
+  creator_id: 1
+
+two:
+  todo_list_id: 1
+  basecamp_id: 1
+  due_at: 2012-09-19 19:54:32
+  content: MyString
+  creator_name: MyString
+  responsible_party_id: 1
+  completed: false
+  responsible_party_name: MyString
+  commented_at: 2012-09-19 19:54:32
+  creator_id: 1
