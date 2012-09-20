@@ -2,7 +2,7 @@ class TimetrackController < ApplicationController
   before_filter :basecamp_connect
   
   def index
-    @projects = Project.all
+    @projects = Project.all(:conditions => ['status = ?', "active"])
     
     #cookies.delete :timetracking
     #cookies.delete :datetracking
