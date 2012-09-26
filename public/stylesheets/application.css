@@ -40,3 +40,9 @@ footer
 	{
 		margin-top:20px;
 	}
+	
+	footer #connection
+	{
+		margin-top:20px;
+		text-align:right;
+	}

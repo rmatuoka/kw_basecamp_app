@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120919225432) do
+ActiveRecord::Schema.define(:version => 20120920041436) do
 
   create_table "briefings", :force => true do |t|
     t.integer  "user_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20120919225432) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",     :default => true
   end
 
   create_table "todo_items", :force => true do |t|
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20120919225432) do
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",                :default => true
   end
 
   create_table "todo_lists", :force => true do |t|
@@ -83,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20120919225432) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",     :default => true
   end
 
 end

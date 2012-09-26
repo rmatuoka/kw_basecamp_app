@@ -1,9 +1,43 @@
 <%content_for :head do%>
 
+<script>
+	
+	$(document).ready(function(){
+		CheckCon();
+	});
+	
+	setInterval(function() {
+	    //alert("Checa conexão");  
+		CheckCon()
+	}, 60000);
+	
+
+	function CheckCon()
+	{
+		$.ajax({
+		  type:     "GET",
+		  dataType: "html",
+		  crossDomain: true,
+		  url: "http://localhost:3000/users/new",
+			success: function(msg){
+				//alert("online");
+				//alert(msg);
+				$("#status").addClass("success");
+				$("#status").html("online");
+		    },
+			error: function(msg){
+				//alert("offline");
+				//alert(msg);
+				$("#status").removeClass("success");
+				$("#status").html("offline");
+		    }
+		});
+	}
+</script>
 <%end%>
 
 <div id="TimeTracking" class="twelve columns">
-	<h1>Time Tracking</h1>
+	<h1>Time Tracking </h1>
 	
 	<div id="name" class="twelve columns">
 		
@@ -12,7 +46,6 @@
 		</div>
 		<div id="name" class="twelve columns panel">
 			<h2>Minhas Tarefas</h2>
-			<p>Legenda</p>
 			<span class="label round success">tarefas para hoje</span>
 			<span class="label round ">tarefas atrasadas</span>
 			<span class="label round secondary">próximas tarefas</span>
