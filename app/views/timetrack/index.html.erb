@@ -60,7 +60,7 @@
 					
 					<div id="name" class="twelve columns panel">
 						<%p.todo_lists.all(:conditions => ['completed = 0']).each do |tl|%>
-							<%tl.todo_items.all(:conditions => ['responsible_party_id = ? AND completed = 0', @me.basecamp_id]).each do |item|%>
+							<%tl.todo_items.all(:conditions => ['responsible_party_id = ? AND completed = 0', @me.id]).each do |item|%>
 
 										<%$total_tarefas = $total_tarefas + 1%>
 										<%=form_tag new_timetrack_path, :method => :get,  :remote => :true, :id => item.basecamp_id.to_s%>
