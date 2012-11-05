@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  avatar_url: MyString
+  first_name: MyString
+  deleted: false
+  im_handle: MyString
+  phone_number_home: MyString
+  email_address: MyString
+  im_service: MyString
+  last_name: MyString
+  basecamp_id: 1
+  administrator: false
+
+two:
+  avatar_url: MyString
+  first_name: MyString
+  deleted: false
+  im_handle: MyString
+  phone_number_home: MyString
+  email_address: MyString
+  im_service: MyString
+  last_name: MyString
+  basecamp_id: 1
+  administrator: false

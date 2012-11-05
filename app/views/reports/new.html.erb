@@ -1,0 +1,39 @@
+<%
+$time = Basecamp::TimeEntry.find(:all, :params => {:todo_item_id => 144626129})
+%>
+
+<%=debug $time%>
+
+<div id="Report" class="twelve columns">
+	<h1><%=@project.name%> - Relatório de Horas  </h1>
+	
+	<div id="name" class="twelve columns">
+		
+		<div id="name" class="alert-box">
+			Selecione o período do relatório.
+		</div>
+		
+		<div id="name" class="six columns">
+			<%=form_tag new_report_path, :method => :get%>
+				<%=hidden_field_tag :project_id, @project.id%>
+				<%=text_field_tag :from, nil,  :class => "three", :placeholder => "De"%>
+				<%=text_field_tag :to, nil,  :class => "three", :placeholder => "Até"%>
+				
+				<%=submit_tag "Vai", :class => "small button"%>
+			</form>
+		</div>
+		<br /><br />
+		<div id="name" class="twelve columns">
+			<%@project.todo_lists.all.each do |tl|%>
+				<h3><%=tl.name%></h3>
+				<div id="name" class="twelve columns">
+					<%tl.todo_items.all.each do |todo_item|%>
+						<%#$time = Basecamp::TimeEntry.report(:todo_item_id => todo_item.basecamp_id)%>
+						<%#=debug $time%>
+					<%end%>
+				</div>
+			<%end%>
+			
+		</div>
+	</div>
+</div>

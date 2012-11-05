@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120920041436) do
+ActiveRecord::Schema.define(:version => 20121009223509) do
 
   create_table "briefings", :force => true do |t|
     t.integer  "user_id"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(:version => 20120920041436) do
     t.text     "conteudo"
     t.text     "descricao"
     t.text     "observacoes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.integer  "basecamp_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,6 +59,22 @@ ActiveRecord::Schema.define(:version => 20120920041436) do
     t.datetime "updated_at"
   end
 
+  create_table "people", :force => true do |t|
+    t.string   "avatar_url"
+    t.string   "first_name"
+    t.boolean  "deleted"
+    t.string   "im_handle"
+    t.string   "phone_number_home"
+    t.string   "email_address"
+    t.string   "im_service"
+    t.string   "last_name"
+    t.integer  "basecamp_id"
+    t.boolean  "administrator"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+  end
+
   create_table "projects", :force => true do |t|
     t.integer  "basecamp_id"
     t.string   "name"
@@ -59,6 +82,18 @@ ActiveRecord::Schema.define(:version => 20120920041436) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deleted",     :default => true
+  end
+
+  create_table "time_entries", :force => true do |t|
+    t.integer  "basecamp_person_id"
+    t.datetime "date"
+    t.decimal  "hours",              :precision => 10, :scale => 2, :default => 0.0
+    t.string   "person_name"
+    t.integer  "basecamp_id"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "todo_item_id"
   end
 
   create_table "todo_items", :force => true do |t|
@@ -75,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20120920041436) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deleted",                :default => true
+    t.integer  "comments_count",         :default => 0
   end
 
   create_table "todo_lists", :force => true do |t|

@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   before_filter :basecamp_connect
   
   def index
-    @projects = Basecamp::Project.find(:all)
+    @projects = Project.all
     @dashboards = Dashboard.all
   end
   

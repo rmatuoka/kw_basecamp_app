@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  basecamp_person_id: 1
+  date: 2012-10-09 18:29:40
+  hours: 9.99
+  person_name: MyString
+  basecamp_id: 1
+  description: MyString
+
+two:
+  basecamp_person_id: 1
+  date: 2012-10-09 18:29:40
+  hours: 9.99
+  person_name: MyString
+  basecamp_id: 1
+  description: MyString

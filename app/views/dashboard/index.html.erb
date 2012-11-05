@@ -2,48 +2,52 @@
 	<h1>Dashboard</h1>
 	
 	<%if !@dashbaords%>
-		<%@dashboards.each do |d|%>
+		<%@dashboards.each do |d|
+		$project = Project.first(:conditions => ['basecamp_id = ?', d.project_id])	
+		%>
 		<div id="Project" class="twelve columns">
-			<h2><%=d.name%></h2>
+			<h2>
+				<input type="button" value="+" onclick="$('#Lists<%=$project.id%>').toggle('slow')" class="small button">
+				<%=$project.name%>
+			</h2>
+			
+			<div id="Lists<%=$project.id%>" style='display:none;'>
+			<%
+			$project.todo_lists.all(:conditions => ['completed = 0']).each do |tl|
+			%>
+				<%if tl.name != "Lista de Aprovação" &&  tl.name != "Backlog"%>
+				<div id="Sprint" class="twelve columns panel">
+					<h3><%=tl.name%></h3>
 
-			<%Basecamp::TodoList.find(:all, :params => { :project_id => d.project_id, :filter => 'pending' }).each do |tl|%>
-			<div id="Sprint" class="twelve columns panel">
-				<h3><%=tl.name%></h3>
-
-				<div id="ToDos" class="three columns panel callout">
-					<h4>To-Dos</h4>
-					<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id, :complete => true }).each do |item|%>
-						<%if !item.completed && item.attributes[:comments_count] < 2%>
-							<%=item.content%> -  <i><%=item.attributes[:responsible_party_name]%></i><br /><br />
+					<div id="ToDos" class="four columns panel callout box">
+						<h4>To-Dos</h4>
+						<%tl.todo_items.all(:conditions => ['completed = 0 AND comments_count < 2']).each do |item|%>
+							<%=item.content%> -  <i><%=item.responsible_party_name%></i><br /><br />
 						<%end%>
-					<%end%>
-				</div>
+					</div>
 
-				<div id="Progress" class="three columns panel">
-					<h4>Em andamento</h4>
-					<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id, :complete => true }).each do |item|%>
-						<%if !item.completed && item.attributes[:comments_count] > 1%>
-							<%=item.content%> -  <i><%=item.attributes[:responsible_party_name]%></i><br /><br />
+					<div id="Progress" class="four columns panel box">
+						<h4>Em andamento</h4>
+						<%tl.todo_items.all(:conditions => ['completed = 0 AND comments_count > 2']).each do |item|%>					
+							<%=item.content%> -  <i><%=item.responsible_party_name%></i><br /><br />	
 						<%end%>
-					<%end%>
-				</div>
+					</div>
 
-				<div id="Verify" class="three columns panel callout">
-					<h4>QA</h4>
-					<%Basecamp::TodoItem.find(:all, :params => { :todo_list_id => tl.id, :complete => true }).each do |item|%>
-						<%if item.completed && item.attributes[:comments_count] > 0%>
- 
-								<%=item.content%> -  <i><%=item.attributes[:responsible_party_name]%> - <%=item.attributes[:comments_count]%></i><br /><br />
+					<div id="Verify" class="four columns panel callout box">
+						<h4>Concluído / QA</h4>
+						<%tl.todo_items.all(:conditions => ['completed = 1']).each do |item|%>
+							<%=item.content%> -  <i><%=item.responsible_party_name%></i><br /><br />
 						<%end%>
-					<%end%>
-				</div>
+					</div>
 
-				<div id="Feitos" class="three columns panel ">
-					<h4>Conluído</h4>
-				</div>
+					<!-- <div id="Feitos" class="three columns panel ">
+						<h4>Conluído</h4>
+					</div> -->
 
-			</div>
+				</div>
+				<%end%>
 			<%end%>
+			</div>
 		</div>
 		<%end%>
 	<%end%>
@@ -52,7 +56,6 @@
 	
 	
 	<div id="name" class="twelve columns">
-		
 		<div id="name" class="alert-box">
 			Você pode escolher os projetos que você mais utiliza para ficar em sua home.
 		</div>
@@ -60,10 +63,10 @@
 		<h2>Projetos</h2>
 		<%@projects.each do |p|%>
 			<%if !Dashboard.first(:conditions => ['project_id = ?', p.id])%>
-			<%=form_tag new_dashboard_path, :method => :get,  :remote => :true, :id => p.id%>
+			<%=form_tag new_dashboard_path, :method => :get,  :remote => :true, :id => p.basecamp_id%>
 				<h3>
 					<%=submit_tag "+", :class => "small button"%>
-					<%=hidden_field_tag :project_id, p.id%>
+					<%=hidden_field_tag :project_id, p.basecamp_id%>
 					<%=hidden_field_tag :name, p.name%>
 					<%=hidden_field_tag :person_id, @me.id%>
 					<%=p.name%>

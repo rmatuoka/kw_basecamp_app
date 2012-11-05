@@ -1,0 +1,19 @@
+<div id="Dashboard" class="twelve columns">
+	<h1>Relatório de Horas</h1>
+	
+	<div id="name" class="twelve columns">
+		
+		<div id="name" class="alert-box">
+			Escolha o projeto que você deseja exportar as horas.
+		</div>
+		<%@projects.each do |p|%>
+			<%=form_tag new_report_path, :method => :get, :id => p.id%>
+				<h3>
+					<%=submit_tag "+", :class => "small button"%>
+					<%=hidden_field_tag :project_id, p.id%>
+					<%=p.name%>
+				</h3>
+			</form>
+		<%end%>
+	</div>
+</div>
